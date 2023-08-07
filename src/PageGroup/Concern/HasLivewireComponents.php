@@ -5,6 +5,7 @@ namespace Rahmanramsi\LivewirePageGroup\PageGroup\Concern;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Component;
 use Livewire\Livewire;
+use Livewire\Mechanisms\ComponentRegistry;
 use Rahmanramsi\LivewirePageGroup\Pages\Page;
 use ReflectionClass;
 
@@ -45,6 +46,14 @@ trait HasLivewireComponents
     }
 
     return $this;
+  }
+
+  /**
+   * @return array<class-string>
+   */
+  public function getPages(): array
+  {
+    return array_unique($this->pages);
   }
 
   public function discoverPages(string $in, string $for): static

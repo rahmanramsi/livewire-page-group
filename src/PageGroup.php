@@ -8,50 +8,36 @@ use Rahmanramsi\LivewirePageGroup\PageGroup\Concern;
 
 class PageGroup extends Component
 {
-  use Concern\HasLivewireComponents,
-    Concern\HasMiddleware;
+    use
+        Concern\HasId,
+        Concern\HasLivewireComponents,
+        Concern\HasMiddleware,
+        Concern\HasRoutes,
+        Concern\HasLayout;
 
-  protected bool $isDefault = false;
+    protected ?Closure $bootUsing = null;
 
-  protected ?Closure $bootUsing = null;
-
-  public static function make(): static
-  {
-    $static = app(static::class);
-    $static->configure();
-
-    return $static;
-  }
-
-  public function default(bool $condition = true): static
-  {
-    $this->isDefault = $condition;
-
-    return $this;
-  }
-
-  public function boot(): void
-  {
-
-    $this->registerRenderHooks();
-
-    $this->registerLivewireComponents();
-    $this->registerLivewirePersistentMiddleware();
-
-    if ($callback = $this->bootUsing) {
-      $callback($this);
+    public static function make(): static
+    {
+        $static = app(static::class);
+        return $static;
     }
-  }
 
-  public function bootUsing(?Closure $callback): static
-  {
-    $this->bootUsing = $callback;
+    public function boot(): void
+    {
 
-    return $this;
-  }
+        $this->registerLivewireComponents();
+        $this->registerLivewirePersistentMiddleware();
 
-  public function isDefault(): bool
-  {
-    return $this->isDefault;
-  }
+        if ($callback = $this->bootUsing) {
+            $callback($this);
+        }
+    }
+
+    public function bootUsing(?Closure $callback): static
+    {
+        $this->bootUsing = $callback;
+
+        return $this;
+    }
 }

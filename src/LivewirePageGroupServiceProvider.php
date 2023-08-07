@@ -2,9 +2,11 @@
 
 namespace Rahmanramsi\LivewirePageGroup;
 
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Rahmanramsi\LivewirePageGroup\Commands\LivewirePageGroupCommand;
+use Illuminate\Routing\Router;
+use Rahmanramsi\LivewirePageGroup\Http\Middleware\SetUpPageGroup;
 
 class LivewirePageGroupServiceProvider extends PackageServiceProvider
 {
@@ -19,7 +21,7 @@ class LivewirePageGroupServiceProvider extends PackageServiceProvider
             ->name('livewire-page-group')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_livewire-page-group_table')
+            ->hasRoute('web')
             ->hasCommands($this->getCommands());
     }
 
@@ -28,6 +30,15 @@ class LivewirePageGroupServiceProvider extends PackageServiceProvider
         $this->app->scoped('livewire-page-group', function (): LivewirePageGroupManager {
             return new LivewirePageGroupManager();
         });
+
+        app(Router::class)->aliasMiddleware('pagegroup', SetUpPageGroup::class);
+    }
+
+    public function packageBooted()
+    {
+        Livewire::addPersistentMiddleware([
+            SetUpPageGroup::class,
+        ]);
     }
 
     /**

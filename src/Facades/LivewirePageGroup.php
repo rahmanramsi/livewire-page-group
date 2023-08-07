@@ -11,6 +11,6 @@ class LivewirePageGroup extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Rahmanramsi\LivewirePageGroup\LivewirePageGroupManager::class;
+        return 'livewire-page-group';
     }
 }
