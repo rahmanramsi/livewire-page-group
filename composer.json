@@ -1,6 +1,6 @@
 {
     "name": "rahmanramsi/livewire-page-group",
-    "description": "This is my package livewire-page-group",
+    "description": "a simple way to group your livewire pages",
     "keywords": [
         "rahmanramsi",
         "laravel",
