@@ -141,4 +141,20 @@ trait HasLivewireComponents
 
     $this->livewireComponents = [];
   }
+
+  /**
+   * @return array<string>
+   */
+  public function getPageDirectories(): array
+  {
+    return $this->pageDirectories;
+  }
+
+  /**
+   * @return array<string>
+   */
+  public function getPageNamespaces(): array
+  {
+    return $this->pageNamespaces;
+  }
 }

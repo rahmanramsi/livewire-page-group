@@ -46,6 +46,8 @@ class LivewirePageGroupServiceProvider extends PackageServiceProvider
      */
     protected function getCommands(): array
     {
-        return [];
+        return [
+            Commands\MakePageCommand::class,
+        ];
     }
 }
