@@ -1,19 +1,9 @@
-# This is my package livewire-page-group
+# Livewire Page Group
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rahmanramsi/livewire-page-group.svg?style=flat-square)](https://packagist.org/packages/rahmanramsi/livewire-page-group)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/rahmanramsi/livewire-page-group/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/rahmanramsi/livewire-page-group/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/rahmanramsi/livewire-page-group/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/rahmanramsi/livewire-page-group/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/rahmanramsi/livewire-page-group.svg?style=flat-square)](https://packagist.org/packages/rahmanramsi/livewire-page-group)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/livewire-page-group.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/livewire-page-group)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+This package is a simple way to group your livewire pages.
 
 ## Installation
 
@@ -23,44 +13,9 @@ You can install the package via composer:
 composer require rahmanramsi/livewire-page-group
 ```
 
-You can publish and run the migrations with:
+## Getting Started
 
-```bash
-php artisan vendor:publish --tag="livewire-page-group-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="livewire-page-group-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="livewire-page-group-views"
-```
-
-## Usage
-
-```php
-$livewirePageGroup = new Rahmanramsi\LivewirePageGroup();
-echo $livewirePageGroup->echoPhrase('Hello, Rahmanramsi!');
-```
-
-## Testing
-
-```bash
-composer test
-```
+WIP
 
 ## Changelog
 
@@ -76,8 +31,9 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Rahman Ramsi](https://github.com/rahmanramsi)
-- [All Contributors](../../contributors)
+-   [Rahman Ramsi](https://github.com/rahmanramsi)
+-   [Filament](https://github.com/filamentphp) for inspiration
+-   [All Contributors](../../contributors)
 
 ## License
 
