@@ -71,6 +71,18 @@ trait HasLivewireComponents
     return $this;
   }
 
+  public function discoverLivewireComponents(string $in, string $for): static
+  {
+    $this->discoverComponents(
+      Component::class,
+      $this->livewireComponents,
+      directory: $in,
+      namespace: $for,
+    );
+
+    return $this;
+  }
+
   /**
    * @param  array<string, class-string<Component>>  $register
    */
