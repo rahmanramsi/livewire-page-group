@@ -2,13 +2,13 @@
 
 namespace Rahmanramsi\LivewirePageGroup;
 
-use Livewire\Livewire;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Illuminate\Routing\Router;
+use Livewire\Livewire;
 use Livewire\Mechanisms\ComponentRegistry;
 use Rahmanramsi\LivewirePageGroup\Http\Middleware\SetUpPageGroup;
 use Rahmanramsi\LivewirePageGroup\Pages\HomePage;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LivewirePageGroupServiceProvider extends PackageServiceProvider
 {

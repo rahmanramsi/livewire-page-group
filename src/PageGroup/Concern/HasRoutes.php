@@ -7,7 +7,7 @@ use Laravel\SerializableClosure\Serializers\Native;
 
 trait HasRoutes
 {
-    protected Closure | Native | null $routes = null;
+    protected Closure|Native|null $routes = null;
 
     protected ?string $domain = null;
 
@@ -20,7 +20,7 @@ trait HasRoutes
         return $this;
     }
 
-    public function domain(?string $domain = null): static
+    public function domain(string $domain = null): static
     {
         $this->domain = $domain;
 

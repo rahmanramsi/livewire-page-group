@@ -8,8 +8,7 @@ use Rahmanramsi\LivewirePageGroup\PageGroup\Concern;
 
 class PageGroup extends Component
 {
-    use
-        Concern\HasId,
+    use Concern\HasId,
         Concern\HasLivewireComponents,
         Concern\HasMiddleware,
         Concern\HasRoutes,
@@ -21,6 +20,7 @@ class PageGroup extends Component
     public static function make(): static
     {
         $static = app(static::class);
+
         return $static;
     }
 

@@ -6,7 +6,6 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Rahmanramsi\LivewirePageGroup\Facades\LivewirePageGroup;
-use Rahmanramsi\LivewirePageGroup\PageGroup;
 
 abstract class Page extends Component
 {
@@ -29,7 +28,7 @@ abstract class Page extends Component
             ]);
     }
 
-    public function getTitle(): string | Htmlable
+    public function getTitle(): string|Htmlable
     {
         return static::$title ?? (string) str(class_basename(static::class))
             ->kebab()
@@ -45,6 +44,7 @@ abstract class Page extends Component
     public static function getLayout(): string
     {
         $pageGroup = LivewirePageGroup::getCurrentPageGroup();
+
         return $pageGroup?->getLayout() ?? static::$layout;
     }
 

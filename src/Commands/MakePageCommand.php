@@ -2,14 +2,14 @@
 
 namespace Rahmanramsi\LivewirePageGroup\Commands;
 
+use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Illuminate\Console\Command;
-use Rahmanramsi\LivewirePageGroup\Commands\Concerns\CanManipulateFiles;
-use Rahmanramsi\LivewirePageGroup\PageGroup;
-use Rahmanramsi\LivewirePageGroup\Facades\LivewirePageGroup;
-use function Laravel\Prompts\text;
 use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
+use Rahmanramsi\LivewirePageGroup\Commands\Concerns\CanManipulateFiles;
+use Rahmanramsi\LivewirePageGroup\Facades\LivewirePageGroup;
+use Rahmanramsi\LivewirePageGroup\PageGroup;
 
 class MakePageCommand extends Command
 {
@@ -44,7 +44,7 @@ class MakePageCommand extends Command
             $pageGroup = LivewirePageGroup::getPageGroup($pageGroup);
         }
 
-        if (!$pageGroup) {
+        if (! $pageGroup) {
             $pageGroups = LivewirePageGroup::getPageGroups();
             /** @var PageGroup $pageGroup */
             $pageGroup = (count($pageGroups) > 1) ? $pageGroups[select(
@@ -56,11 +56,11 @@ class MakePageCommand extends Command
             )] : Arr::first($pageGroups);
         }
 
-        if (!$pageGroup) {
+        if (! $pageGroup) {
             $this->components->error('No page group found.');
+
             return static::FAILURE;
         }
-
 
         $pageDirectories = $pageGroup->getPageDirectories();
         $pageNamespaces = $pageGroup->getPageNamespaces();
@@ -85,7 +85,7 @@ class MakePageCommand extends Command
 
         $path = (string) str($page)
             ->prepend('/')
-            ->prepend(empty($resource) ? ($path ?? '') : ($resourcePath ?? '') . "\\{$resource}\\Pages\\")
+            ->prepend(empty($resource) ? ($path ?? '') : ($resourcePath ?? '')."\\{$resource}\\Pages\\")
             ->replace('\\', '/')
             ->replace('//', '/')
             ->append('.php');
@@ -101,16 +101,15 @@ class MakePageCommand extends Command
             $path,
         ];
 
-        if (!$this->option('force') && $this->checkForCollision($files)) {
+        if (! $this->option('force') && $this->checkForCollision($files)) {
             return static::INVALID;
         }
 
         $this->copyStubToApp('Page', $path, [
             'class' => $pageClass,
-            'namespace' => str($namespace ?? '') . ($pageNamespace !== '' ? "\\{$pageNamespace}" : ''),
+            'namespace' => str($namespace ?? '').($pageNamespace !== '' ? "\\{$pageNamespace}" : ''),
             'view' => $view,
         ]);
-
 
         $this->copyStubToApp('PageView', $viewPath);
 

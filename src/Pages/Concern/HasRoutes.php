@@ -13,12 +13,12 @@ trait HasRoutes
     /**
      * @var string | array<string>
      */
-    protected static string | array $routeMiddleware = [];
+    protected static string|array $routeMiddleware = [];
 
     /**
      * @var string | array<string>
      */
-    protected static string | array $withoutRouteMiddleware = [];
+    protected static string|array $withoutRouteMiddleware = [];
 
     public static function routes(PageGroup $pageGroup): void
     {
@@ -29,7 +29,7 @@ trait HasRoutes
             ->name((string) str($slug)->replace('/', '.'));
     }
 
-    public static function getRouteName(?string $panel = null): string
+    public static function getRouteName(string $panel = null): string
     {
         $panel ??= LivewirePageGroup::getCurrentPageGroup()->getId();
 
@@ -48,7 +48,7 @@ trait HasRoutes
     /**
      * @return string | array<string>
      */
-    public static function getRouteMiddleware(PageGroup $pageGroup): string | array
+    public static function getRouteMiddleware(PageGroup $pageGroup): string|array
     {
         return [
             ...static::$routeMiddleware,
@@ -58,7 +58,7 @@ trait HasRoutes
     /**
      * @return string | array<string>
      */
-    public static function getWithoutRouteMiddleware(PageGroup $pageGroup): string | array
+    public static function getWithoutRouteMiddleware(PageGroup $pageGroup): string|array
     {
         return static::$withoutRouteMiddleware;
     }

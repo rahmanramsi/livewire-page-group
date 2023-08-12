@@ -3,7 +3,6 @@
 namespace Rahmanramsi\LivewirePageGroup\Http\Middleware;
 
 use Closure;
-use Exception;
 use Illuminate\Http\Request;
 use Rahmanramsi\LivewirePageGroup\Facades\LivewirePageGroup;
 
