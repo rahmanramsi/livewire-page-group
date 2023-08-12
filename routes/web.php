@@ -15,6 +15,9 @@ Route::name('livewirePageGroup.')
                 ->prefix($pageGroup->getPath())
                 ->group(function () use ($pageGroup) {
                     Route::name('pages.')->group(function () use ($pageGroup): void {
+                        Route::get('/', $pageGroup->getHomePage())
+                            ->name('home');
+
                         foreach ($pageGroup->getPages() as $page) {
                             $page::routes($pageGroup);
                         }

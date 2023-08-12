@@ -15,7 +15,7 @@ class LivewirePageGroupManager
 
     public function getCurrentPageGroup(): ?PageGroup
     {
-        return $this->currentPageGroup ?? null;
+        return $this->currentPageGroup;
     }
 
     public function bootCurrentPageGroup(): void

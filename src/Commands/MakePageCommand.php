@@ -56,6 +56,12 @@ class MakePageCommand extends Command
             )] : Arr::first($pageGroups);
         }
 
+        if (!$pageGroup) {
+            $this->components->error('No page group found.');
+            return static::FAILURE;
+        }
+
+
         $pageDirectories = $pageGroup->getPageDirectories();
         $pageNamespaces = $pageGroup->getPageNamespaces();
 

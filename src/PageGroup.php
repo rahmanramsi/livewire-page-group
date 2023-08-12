@@ -13,7 +13,8 @@ class PageGroup extends Component
         Concern\HasLivewireComponents,
         Concern\HasMiddleware,
         Concern\HasRoutes,
-        Concern\HasLayout;
+        Concern\HasLayout,
+        Concern\HasHomePage;
 
     protected ?Closure $bootUsing = null;
 

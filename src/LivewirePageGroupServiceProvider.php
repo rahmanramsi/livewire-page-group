@@ -6,7 +6,9 @@ use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Illuminate\Routing\Router;
+use Livewire\Mechanisms\ComponentRegistry;
 use Rahmanramsi\LivewirePageGroup\Http\Middleware\SetUpPageGroup;
+use Rahmanramsi\LivewirePageGroup\Pages\HomePage;
 
 class LivewirePageGroupServiceProvider extends PackageServiceProvider
 {
@@ -39,6 +41,10 @@ class LivewirePageGroupServiceProvider extends PackageServiceProvider
         Livewire::addPersistentMiddleware([
             SetUpPageGroup::class,
         ]);
+
+        $componentRegistry = app(ComponentRegistry::class);
+
+        Livewire::component($componentRegistry->getName(HomePage::class), HomePage::class);
     }
 
     /**

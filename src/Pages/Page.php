@@ -45,7 +45,6 @@ abstract class Page extends Component
     public static function getLayout(): string
     {
         $pageGroup = LivewirePageGroup::getCurrentPageGroup();
-
         return $pageGroup?->getLayout() ?? static::$layout;
     }
 
