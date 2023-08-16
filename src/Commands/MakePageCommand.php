@@ -5,11 +5,12 @@ namespace Rahmanramsi\LivewirePageGroup\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\text;
 use Rahmanramsi\LivewirePageGroup\Commands\Concerns\CanManipulateFiles;
 use Rahmanramsi\LivewirePageGroup\Facades\LivewirePageGroup;
 use Rahmanramsi\LivewirePageGroup\PageGroup;
+
+use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
 
 class MakePageCommand extends Command
 {

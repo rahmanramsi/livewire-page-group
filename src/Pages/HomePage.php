@@ -12,7 +12,7 @@ class HomePage extends Page
     public static function routes(PageGroup $pageGroup): void
     {
         $slug = static::getSlug();
-        Route::get("/", static::class)
+        Route::get('/', static::class)
             ->middleware(static::getRouteMiddleware($pageGroup))
             ->withoutMiddleware(static::getWithoutRouteMiddleware($pageGroup))
             ->name((string) str($slug)->replace('/', '.'));

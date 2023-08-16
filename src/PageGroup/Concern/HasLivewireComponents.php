@@ -96,7 +96,7 @@ trait HasLivewireComponents
 
         $filesystem = app(Filesystem::class);
 
-        if ((!$filesystem->exists($directory)) && (!str($directory)->contains('*'))) {
+        if ((! $filesystem->exists($directory)) && (! str($directory)->contains('*'))) {
             return;
         }
 
@@ -104,7 +104,7 @@ trait HasLivewireComponents
 
         foreach ($filesystem->allFiles($directory) as $file) {
             $variableNamespace = $namespace->contains('*') ? str_ireplace(
-                ['\\' . $namespace->before('*'), $namespace->after('*')],
+                ['\\'.$namespace->before('*'), $namespace->after('*')],
                 ['', ''],
                 str($file->getPath())
                     ->after(base_path())
@@ -128,11 +128,11 @@ trait HasLivewireComponents
                 $this->queueLivewireComponentForRegistration($class);
             }
 
-            if (!is_subclass_of($class, $baseClass)) {
+            if (! is_subclass_of($class, $baseClass)) {
                 continue;
             }
 
-            if (method_exists($class, 'isDiscovered') && !$class::isDiscovered()) {
+            if (method_exists($class, 'isDiscovered') && ! $class::isDiscovered()) {
                 continue;
             }
 
