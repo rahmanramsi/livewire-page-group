@@ -25,7 +25,8 @@ abstract class Page extends Component
             ->layout(static::getLayout(), [
                 'livewire' => $this,
                 ...$this->getLayoutData(),
-            ]);
+            ])
+            ->title($this->getTitle());
     }
 
     public function getTitle(): string|Htmlable
