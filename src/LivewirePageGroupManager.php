@@ -34,7 +34,7 @@ class LivewirePageGroupManager
         $this->currentPageGroup = $pageGroup;
     }
 
-    public function getPageGroup(string $id = null): PageGroup
+    public function getPageGroup(?string $id = null): PageGroup
     {
         return $this->pageGroups[$id] ?? null;
     }

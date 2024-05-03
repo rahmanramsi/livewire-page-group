@@ -20,7 +20,7 @@ trait HasRoutes
         return $this;
     }
 
-    public function domain(string $domain = null): static
+    public function domain(?string $domain = null): static
     {
         $this->domain = $domain;
 

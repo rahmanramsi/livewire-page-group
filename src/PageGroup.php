@@ -8,12 +8,12 @@ use Rahmanramsi\LivewirePageGroup\PageGroup\Concern;
 
 class PageGroup extends Component
 {
-    use Concern\HasId,
+    use Concern\HasHomePage,
+        Concern\HasId,
+        Concern\HasLayout,
         Concern\HasLivewireComponents,
         Concern\HasMiddleware,
-        Concern\HasRoutes,
-        Concern\HasLayout,
-        Concern\HasHomePage;
+        Concern\HasRoutes;
 
     protected ?Closure $bootUsing = null;
 

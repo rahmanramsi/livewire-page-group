@@ -29,7 +29,7 @@ trait HasRoutes
             ->name((string) str($slug)->replace('/', '.'));
     }
 
-    public static function getRouteName(string $panel = null): string
+    public static function getRouteName(?string $panel = null): string
     {
         $panel ??= LivewirePageGroup::getCurrentPageGroup()->getId();
 
