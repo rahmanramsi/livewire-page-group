@@ -24,12 +24,14 @@ class PageGroup extends Component
         return $static;
     }
 
-    public function boot(): void
+    public function register(): void
     {
-
         $this->registerLivewireComponents();
         $this->registerLivewirePersistentMiddleware();
+    }
 
+    public function boot(): void
+    {
         if ($callback = $this->bootUsing) {
             $callback($this);
         }

@@ -50,5 +50,7 @@ class LivewirePageGroupManager
     public function registerPageGroup(PageGroup $pageGroup): void
     {
         $this->pageGroups[$pageGroup->getId()] = $pageGroup;
+
+        $pageGroup->register();
     }
 }
