@@ -30,7 +30,7 @@ class LivewirePageGroupServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->app->scoped('livewire-page-group', function (): LivewirePageGroupManager {
-            return new LivewirePageGroupManager();
+            return new LivewirePageGroupManager;
         });
 
         app(Router::class)->aliasMiddleware('pagegroup', SetUpPageGroup::class);
