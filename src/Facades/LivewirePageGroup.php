@@ -3,9 +3,10 @@
 namespace Rahmanramsi\LivewirePageGroup\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Rahmanramsi\LivewirePageGroup\LivewirePageGroupManager;
 
 /**
- * @see \Rahmanramsi\LivewirePageGroup\LivewirePageGroup
+ * @see LivewirePageGroupManager
  */
 class LivewirePageGroup extends Facade
 {

@@ -3,11 +3,10 @@
 namespace Rahmanramsi\LivewirePageGroup\PageGroup\Concern;
 
 use Closure;
-use Laravel\SerializableClosure\Serializers\Native;
 
 trait HasRoutes
 {
-    protected Closure|Native|null $routes = null;
+    protected ?Closure $routes = null;
 
     protected ?string $domain = null;
 

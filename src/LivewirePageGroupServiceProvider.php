@@ -4,9 +4,9 @@ namespace Rahmanramsi\LivewirePageGroup;
 
 use Illuminate\Routing\Router;
 use Livewire\Livewire;
-use Livewire\Mechanisms\ComponentRegistry;
 use Rahmanramsi\LivewirePageGroup\Http\Middleware\SetUpPageGroup;
 use Rahmanramsi\LivewirePageGroup\Pages\HomePage;
+use Rahmanramsi\LivewirePageGroup\Support\LivewireCompatibility;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -36,15 +36,13 @@ class LivewirePageGroupServiceProvider extends PackageServiceProvider
         app(Router::class)->aliasMiddleware('pagegroup', SetUpPageGroup::class);
     }
 
-    public function packageBooted()
+    public function packageBooted(): void
     {
         Livewire::addPersistentMiddleware([
             SetUpPageGroup::class,
         ]);
 
-        $componentRegistry = app(ComponentRegistry::class);
-
-        Livewire::component($componentRegistry->getName(HomePage::class), HomePage::class);
+        app(LivewireCompatibility::class)->registerComponent(HomePage::class);
     }
 
     /**

@@ -4,9 +4,8 @@ namespace Rahmanramsi\LivewirePageGroup\PageGroup\Concern;
 
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Component;
-use Livewire\Livewire;
-use Livewire\Mechanisms\ComponentRegistry;
 use Rahmanramsi\LivewirePageGroup\Pages\Page;
+use Rahmanramsi\LivewirePageGroup\Support\LivewireCompatibility;
 use ReflectionClass;
 
 trait HasLivewireComponents
@@ -142,15 +141,15 @@ trait HasLivewireComponents
 
     protected function queueLivewireComponentForRegistration(string $component): void
     {
-        $componentName = app(ComponentRegistry::class)->getName($component);
+        $componentName = app(LivewireCompatibility::class)->componentName($component);
 
         $this->livewireComponents[$componentName] = $component;
     }
 
     protected function registerLivewireComponents(): void
     {
-        foreach ($this->livewireComponents as $componentName => $componentClass) {
-            Livewire::component($componentName, $componentClass);
+        foreach ($this->livewireComponents as $componentClass) {
+            app(LivewireCompatibility::class)->registerComponent($componentClass);
         }
 
         $this->livewireComponents = [];

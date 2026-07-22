@@ -2,6 +2,7 @@
 
 namespace Rahmanramsi\LivewirePageGroup\Pages\Concern;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Rahmanramsi\LivewirePageGroup\Facades\LivewirePageGroup;
 use Rahmanramsi\LivewirePageGroup\PageGroup;
@@ -50,9 +51,7 @@ trait HasRoutes
      */
     public static function getRouteMiddleware(PageGroup $pageGroup): string|array
     {
-        return [
-            ...static::$routeMiddleware,
-        ];
+        return Arr::wrap(static::$routeMiddleware);
     }
 
     /**

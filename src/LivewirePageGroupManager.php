@@ -20,21 +20,27 @@ class LivewirePageGroupManager
 
     public function bootCurrentPageGroup(): void
     {
-        if ($this->isCurrentPageGroupBooted) {
+        $pageGroup = $this->getCurrentPageGroup();
+
+        if ($this->isCurrentPageGroupBooted || ! $pageGroup) {
             return;
         }
 
-        $this->getCurrentPageGroup()->boot();
+        $pageGroup->boot();
 
         $this->isCurrentPageGroupBooted = true;
     }
 
     public function setCurrentPageGroup(PageGroup $pageGroup): void
     {
+        if ($this->currentPageGroup !== $pageGroup) {
+            $this->isCurrentPageGroupBooted = false;
+        }
+
         $this->currentPageGroup = $pageGroup;
     }
 
-    public function getPageGroup(?string $id = null): PageGroup
+    public function getPageGroup(?string $id = null): ?PageGroup
     {
         return $this->pageGroups[$id] ?? null;
     }

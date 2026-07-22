@@ -1,0 +1,146 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Laravel ${{ matrix.laravel }} / Livewire ${{ matrix.livewire }} / PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - laravel: '10'
+            laravel_constraint: '^10.0'
+            livewire: '3'
+            livewire_constraint: '^3.8'
+            php: '8.1'
+            testbench: '8'
+            testbench_constraint: '^8.22'
+          - laravel: '11'
+            laravel_constraint: '^11.0'
+            livewire: '3'
+            livewire_constraint: '^3.8'
+            php: '8.2'
+            testbench: '9'
+            testbench_constraint: '^9.0'
+          - laravel: '12'
+            laravel_constraint: '^12.0'
+            livewire: '3'
+            livewire_constraint: '^3.8'
+            php: '8.2'
+            testbench: '10'
+            testbench_constraint: '^10.0'
+          - laravel: '13'
+            laravel_constraint: '^13.0'
+            livewire: '3'
+            livewire_constraint: '^3.8'
+            php: '8.3'
+            testbench: '11'
+            testbench_constraint: '^11.0'
+          - laravel: '10'
+            laravel_constraint: '^10.0'
+            livewire: '4'
+            livewire_constraint: '^4.1'
+            php: '8.1'
+            testbench: '8'
+            testbench_constraint: '^8.22'
+          - laravel: '11'
+            laravel_constraint: '^11.0'
+            livewire: '4'
+            livewire_constraint: '^4.1'
+            php: '8.2'
+            testbench: '9'
+            testbench_constraint: '^9.0'
+          - laravel: '12'
+            laravel_constraint: '^12.0'
+            livewire: '4'
+            livewire_constraint: '^4.1'
+            php: '8.2'
+            testbench: '10'
+            testbench_constraint: '^10.0'
+          - laravel: '13'
+            laravel_constraint: '^13.0'
+            livewire: '4'
+            livewire_constraint: '^4.1'
+            php: '8.3'
+            testbench: '11'
+            testbench_constraint: '^11.0'
+          - laravel: '13'
+            laravel_constraint: '^13.0'
+            livewire: '3'
+            livewire_constraint: '^3.8'
+            php: '8.5'
+            testbench: '11'
+            testbench_constraint: '^11.0'
+          - laravel: '13'
+            laravel_constraint: '^13.0'
+            livewire: '4'
+            livewire_constraint: '^4.1'
+            php: '8.5'
+            testbench: '11'
+            testbench_constraint: '^11.0'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate Composer metadata
+        run: composer validate --strict --no-check-lock
+
+      - name: Select Livewire version
+        run: >-
+          composer require
+          "livewire/livewire:${{ matrix.livewire_constraint }}"
+          --no-update
+          --no-interaction
+
+      - name: Select Laravel and Testbench versions
+        run: >-
+          composer require --dev
+          "laravel/framework:${{ matrix.laravel_constraint }}"
+          "orchestra/testbench:${{ matrix.testbench_constraint }}"
+          --no-update
+          --no-interaction
+
+      - name: Install dependencies
+        # Laravel 10 and 11 are compatibility targets even when Composer flags upstream advisories.
+        run: >-
+          composer update --with-all-dependencies --prefer-dist
+          --no-interaction --no-progress --no-security-blocking
+
+      - name: Show resolved framework versions
+        run: |
+          composer show laravel/framework
+          composer show livewire/livewire
+          composer show orchestra/testbench
+          composer show pestphp/pest
+
+      - name: Run tests
+        run: composer test
+
+      - name: Check code style
+        run: vendor/bin/pint --test
+
+      - name: Show dependency diagnostics after failure
+        if: failure()
+        run: |
+          composer show --locked || true
+          composer show laravel/framework --all || true
+          composer show livewire/livewire --all || true
+          composer show orchestra/testbench --all || true
+          composer audit || true
+          composer diagnose || true

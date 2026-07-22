@@ -10,7 +10,12 @@ class SetUpPageGroup
 {
     public function handle(Request $request, Closure $next, string $pageGroup): mixed
     {
-        $pageGroup = LivewirePageGroup::getPageGroup($pageGroup);
+        $pageGroupId = $pageGroup;
+        $pageGroup = LivewirePageGroup::getPageGroup($pageGroupId);
+
+        if (! $pageGroup) {
+            abort(404, "Page group [{$pageGroupId}] not found.");
+        }
 
         LivewirePageGroup::setCurrentPageGroup($pageGroup);
 

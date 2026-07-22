@@ -39,10 +39,17 @@ class MakePageCommand extends Command
             (string) str($page)->beforeLast('\\') :
             '';
 
-        $pageGroup = $this->option('group');
+        $pageGroupId = $this->option('group');
+        $pageGroup = null;
 
-        if ($pageGroup) {
-            $pageGroup = LivewirePageGroup::getPageGroup($pageGroup);
+        if (filled($pageGroupId)) {
+            $pageGroup = LivewirePageGroup::getPageGroup((string) $pageGroupId);
+
+            if (! $pageGroup) {
+                $this->components->error("Page group [{$pageGroupId}] not found.");
+
+                return static::FAILURE;
+            }
         }
 
         if (! $pageGroup) {
@@ -86,7 +93,7 @@ class MakePageCommand extends Command
 
         $path = (string) str($page)
             ->prepend('/')
-            ->prepend(empty($resource) ? ($path ?? '') : ($resourcePath ?? '')."\\{$resource}\\Pages\\")
+            ->prepend($path)
             ->replace('\\', '/')
             ->replace('//', '/')
             ->append('.php');
@@ -100,6 +107,7 @@ class MakePageCommand extends Command
 
         $files = [
             $path,
+            $viewPath,
         ];
 
         if (! $this->option('force') && $this->checkForCollision($files)) {

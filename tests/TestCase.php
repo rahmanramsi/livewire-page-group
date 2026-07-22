@@ -2,9 +2,10 @@
 
 namespace Rahmanramsi\LivewirePageGroup\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rahmanramsi\LivewirePageGroup\LivewirePageGroupServiceProvider;
+use Rahmanramsi\LivewirePageGroup\Tests\Fixtures\TestPageGroupServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -12,25 +13,21 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Rahmanramsi\\LivewirePageGroup\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        TestPageGroupServiceProvider::$bootCount = 0;
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
+            LivewireServiceProvider::class,
             LivewirePageGroupServiceProvider::class,
+            TestPageGroupServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
+        config()->set('app.key', 'base64:'.base64_encode(str_repeat('a', 32)));
         config()->set('database.default', 'testing');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_livewire-page-group_table.php.stub';
-        $migration->up();
-        */
     }
 }
